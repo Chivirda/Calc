@@ -15,19 +15,19 @@ public class Calc {
         }
     }
 
-    private static void checkString(String inputString) {
+    private static void checkString(String inputString) throws IOException {
         Pattern arabPattern = Pattern.compile("\\d");
         Matcher arabMatcher = arabPattern.matcher(inputString);
         Pattern romePattern = Pattern.compile("[IVX]");
         Matcher romeMatcher = romePattern.matcher(inputString);
 
         if (arabMatcher.find() && romeMatcher.find()) {
-            throw new ArithmeticException();
+            throw new IOException();
         } else if (romeMatcher.find()) {
             System.out.println("Rome Calc");
         } else if (arabMatcher.find()) {
-            System.out.println("Arab Calc");
-        }
+            ArabCalc.arabCalc(inputString);
+        } else throw new IOException();
 
     }
 }
