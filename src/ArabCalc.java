@@ -1,28 +1,37 @@
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class ArabCalc {
     static void arabCalc(String inputString) {
-        int a = 0;
-        int b = 0;
         int result = 0;
-        Pattern numPattern = Pattern.compile("[\\d?]+[^\\s]");
-        Matcher numMatcher = numPattern.matcher(inputString);
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (String part : inputString.split("\\s\\+\\s|\\s\\*\\s|\\s/\\s|\\s-\\s")) {
+            numbers.add(Integer.parseInt(part));
+        }
+
         Pattern arithmeticPattern = Pattern.compile("[+\\-*/]");
         Matcher arithmeticMatcher = arithmeticPattern.matcher(inputString);
 
-        while (numMatcher.find()) {
-            System.out.println(inputString.substring(numMatcher.start(), numMatcher.end()));
-            System.out.println(inputString.substring(numMatcher.start(), numMatcher.end()));
-        }
-        
         if (!arithmeticMatcher.find()) throw new ArithmeticException();
 
-        Pattern multiplyPattern = Pattern.compile("\\+");
+        Pattern addPattern = Pattern.compile("\\+");
+        Pattern multiplyPattern = Pattern.compile("\\*");
+        Pattern dividePattern = Pattern.compile("/");
+        Pattern subtractPattern = Pattern.compile("-");
+        Matcher addMatcher = addPattern.matcher(inputString);
         Matcher multiplyMatcher = multiplyPattern.matcher(inputString);
+        Matcher divideMatcher = dividePattern.matcher(inputString);
+        Matcher subtractMatcher = subtractPattern.matcher(inputString);
 
-        if (multiplyMatcher.find()) {
-            result = a + b;
+        if (addMatcher.find()) {
+            result = numbers.get(0) + numbers.get(1);
+        } else if (multiplyMatcher.find()) {
+            result = numbers.get(0) * numbers.get(1);
+        } else if (divideMatcher.find()) {
+            result = numbers.get(0) / numbers.get(1);
+        } else if (subtractMatcher.find()) {
+            result = numbers.get(0) - numbers.get(1);
         }
 
         System.out.println(result);
