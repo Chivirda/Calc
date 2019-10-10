@@ -24,7 +24,7 @@ public class Calc {
         if (arabMatcher.find() && romeMatcher.find()) {
             throw new IOException();
         } else if (romeMatcher.find()) {
-            System.out.println("Rome Calc");
+            RomeCalc.romeCalc(inputString);
         } else if (arabMatcher.find()) {
             ArabCalc.arabCalc(inputString);
         } else throw new IOException();
