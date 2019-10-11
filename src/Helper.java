@@ -3,6 +3,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Helper {
+    final static String SPLITSTRING = "\\s\\+\\s|\\s\\*\\s|\\s/\\s|\\s-\\s";
     static int checkMath(String inputString, ArrayList<Integer> numbers) {
         int result = 0;
         Pattern arithmeticPattern = Pattern.compile("[+\\-*/]");
